@@ -1,9 +1,3 @@
-// The user can press b and it should beep right away
-// The user can input any number from 1 to 9 and it should
-// immediately output "setting timer for x seconds...", and
-// beep after that number of seconds has passed
-// The user can use ctrl + c to exit the program, at which point the program should say "Thanks for using me, ciao!" before terminating
-
 const chalk = require('chalk');
 
 const stdin = process.stdin;
@@ -19,18 +13,23 @@ process.stdout.write('- Input a number from 1 to 9 to set a beep timer for that 
 process.stdout.write('- Press CTRL+C to exit the program\n\n');
 process.stdout.write(chalk.yellow('Action History:\n'));
 
+let timerCount = 0;
 
 stdin.on('data', (key) => {
   if (key === 'b') {
-    console.log('Pressed ' + chalk.red('b ') + '- beep!');
+    console.log('pressed ' + chalk.red('b') + ' - beep!');
     process.stdout.write('\x07');
   }
 
   if (key >= 1 && key <= 9) {
-    console.log('setting timer for ' + chalk.red(key) + ' seconds...');
+    timerCount++;
+
+    const currentTimer = timerCount;
+
+    console.log('setting timer #' + currentTimer + ' for ' + chalk.red(key) + ' seconds...');
 
     setTimeout(() => {
-      console.log('\tbeep!')
+      console.log('\ttimer #' + currentTimer + ' - beep!')
       process.stdout.write('\x07');
     }, (key * 1000));
   }
