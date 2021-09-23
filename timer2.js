@@ -29,7 +29,7 @@ stdin.on('data', (key) => {
     console.log('setting timer #' + currentTimer + ' for ' + chalk.red(key) + ' seconds...');
 
     setTimeout(() => {
-      console.log('\ttimer #' + currentTimer + ' - beep!')
+      console.log('\ttimer #' + currentTimer + ' - beep!');
       process.stdout.write('\x07');
     }, (key * 1000));
   }
